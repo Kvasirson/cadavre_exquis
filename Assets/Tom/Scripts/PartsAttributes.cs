@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PartTypes
+public enum PartsAttributes
 {
-    Head,
-    Torso,
-    Arms,
-    Legs,
-    Tail
+    Cuteness,
+    Tastiness,
+    Strength,
+    Exotism,
 }

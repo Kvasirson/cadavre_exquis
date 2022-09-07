@@ -1,92 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class ShopScript : MonoBehaviour
 {
     [SerializeField]
-    [Range(0f, 1f)]
-    float m_favoriteAttributeChance;
+    PartsAttributes m_favoriteAttribute;
 
-    PartObject[] _objectsPool;
-    List<PartObject> _tempObjectsPool;
+    [SerializeField]
+    SpriteRenderer m_objectSpriteRend;
 
-    List<PartTypes> _usedTypes;
+    PartObject _displayedObject;
 
-    PartObject [] CreatePool()
+    int _objectPrice;
+
+    public PartsAttributes FavoriteAttribute
     {
-        string[] partObjectsGUIDs = AssetDatabase.FindAssets("t:PartObject", new[] { "Assets/ScriptableObjects" });
-
-        PartObject[] pool = new PartObject[partObjectsGUIDs.Length];
-
-        for (int i = 0; i < pool.Length; i++)
-        {
-            string partObjectGUID = partObjectsGUIDs[i];
-            string path = AssetDatabase.GUIDToAssetPath(partObjectGUID);
-            PartObject partObject = AssetDatabase.LoadAssetAtPath<PartObject>(path);
-            pool[i] = partObject;
-        }
-
-        return pool;
+        get { return m_favoriteAttribute; }
     }
 
-    void GetAvailableObjects()
+    public PartObject DisplayedObject
     {
-        List<PartObject> availableObjects = new List<PartObject>();
-        foreach (PartObject obj in _tempObjectsPool)
-        {
-            bool isExcluded = false;
-            foreach (PartTypes excludedType in _usedTypes)
-            {
-                if (obj.GetObjectType == excludedType)
-                {
-                    isExcluded = true;
-                    break;
-                }
-            }
+        get { return _displayedObject; }
 
-            if (!isExcluded)
-            {
-                availableObjects.Add(obj);
-            }
+        set 
+        { 
+            _displayedObject = value;
+            ChangeDisplayedObject();
         }
-
-        _tempObjectsPool = availableObjects;
     }
 
-    PartObject GetObject(int favoriteAttributeIndex)
+    public int ObjectPrice
     {
-        List<PartObject> favoriteObjects = new List<PartObject>();
-        List<PartObject> otherObjects = _tempObjectsPool;
+        get { return _objectPrice; }
+    }
 
-        foreach(PartObject obj in _tempObjectsPool)
+    void ChangeDisplayedObject()
+    {
+        if(_displayedObject != null)
         {
-            if(obj.GetDominantAttributeIndex() == favoriteAttributeIndex)
-            {
-                favoriteObjects.Add(obj);
-                otherObjects.Remove(obj);
-            }
-        }
-
-        float chance = Random.Range(0f, 1f);
-        if (chance < m_favoriteAttributeChance)
-        {
-            int randomIndex = Random.Range(0, favoriteObjects.Count);
-
-            return favoriteObjects[randomIndex];
+            m_objectSpriteRend.sprite = _displayedObject.partSprite;
+            _objectPrice = Random.Range(0, 100);
         }
         else
         {
-            int randomIndex = Random.Range(0, otherObjects.Count);
-
-            return otherObjects[randomIndex];
+            m_objectSpriteRend = null;
         }
-
-    }
-
-    void ResetTempPool()
-    {
-        _tempObjectsPool = new List<PartObject>(_objectsPool);
     }
 }
