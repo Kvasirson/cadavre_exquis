@@ -26,19 +26,19 @@ public class Interaction : MonoBehaviour
 				switch (state)
 				{
 					case State.EMPTY:
-						Debug.Log("openShop()");
+						Debug.Log("openShopMenu()");
 						break;
 
 					case State.EGG:
-						;
+						Debug.Log("openSellMenu()"); ;
 						break;
 
 					case State.LIMB:
-						;
+						Debug.Log("can't interact");
 						break;
 
 					default:
-						;
+						Debug.Log("default");
 						break;
 				}
 			}
