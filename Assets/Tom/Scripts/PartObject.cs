@@ -7,9 +7,6 @@ public class PartObject : ScriptableObject
     Sprite m_partSprite;
 
     [SerializeField]
-    string m_partName;
-
-    [SerializeField]
     PartTypes m_partType;
 
     [Header("Attributes")]
