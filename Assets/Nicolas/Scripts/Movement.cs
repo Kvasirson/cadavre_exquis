@@ -8,9 +8,8 @@ public class Movement : MonoBehaviour
 	public float speed;
 
 	public GameObject camera;
-	public float offset;
-	private float deadZoneLeft, deadZoneRight;
-
+	public float offset, leftBorder, rightBorder;
+	private float deadZoneLeft, deadZoneRight, camX;
 
     void FixedUpdate()
 	{
@@ -23,16 +22,28 @@ public class Movement : MonoBehaviour
 
 	private void MoveCamera(Vector3 movement)
     {
-		deadZoneLeft = camera.transform.position.x - offset;
-		deadZoneRight = camera.transform.position.x + offset;
+		camX = camera.transform.position.x;
+		deadZoneLeft = camX - offset;
+		deadZoneRight = camX + offset;
 
-		if(this.transform.position.x <= deadZoneLeft)
-        {
-			camera.transform.position += movement;
+		float height = 2f * camera.GetComponent<Camera>().orthographicSize;
+		float width = height * camera.GetComponent<Camera>().aspect;
+
+
+		if (camX - width / 2 >= leftBorder)
+		{
+			if (this.transform.position.x <= deadZoneLeft)
+			{
+				camera.transform.position += movement;
+			}
         }
-		else if(this.transform.position.x >= deadZoneRight)
+
+		if(camX + width / 2 <= rightBorder)
         {
-			camera.transform.position += movement;
+			if (this.transform.position.x >= deadZoneRight)
+			{
+				camera.transform.position += movement;
+			}
 		}
-    }
+	}
 }
