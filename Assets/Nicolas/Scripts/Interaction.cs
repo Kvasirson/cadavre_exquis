@@ -35,7 +35,7 @@ public class Interaction : MonoBehaviour
 				switch (_state)
 				{
 					case State.EMPTY:
-						if(_vendor != null)
+						if(_vendor != null && _gameManager._eggIscomplete != true)
                         {
 							BuyPart();
                         }
@@ -83,7 +83,6 @@ public class Interaction : MonoBehaviour
 			{
 				_isInRange = true;
 				_vendor = col.transform.GetComponent<ShopScript>();
-				Debug.Log("collide");
 			}
 			else if (col.tag == "egg")
             {
@@ -102,8 +101,6 @@ public class Interaction : MonoBehaviour
         {
 			_egg = null;
 		}
-
-		Debug.Log("exit");
 	}
 
     #region Interaction Outcomes

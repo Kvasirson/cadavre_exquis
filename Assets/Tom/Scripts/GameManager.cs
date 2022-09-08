@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public List<PartTypes> _usedTypes;
 
+    [HideInInspector]
+    public bool _eggIscomplete;
+
     float timerCurTime;
     Coroutine curTimer;
 
@@ -139,6 +142,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        PartObject selectedObject;
+
         float chance = Random.Range(0f, 1f);
         if (chance < m_favoriteAttributeChance)
         {
@@ -149,7 +154,7 @@ public class GameManager : MonoBehaviour
 
             int randomIndex = Random.Range(0, favoriteObjects.Count);
 
-            return favoriteObjects[randomIndex];
+            selectedObject = favoriteObjects[randomIndex];
         }
         else
         {
@@ -160,8 +165,10 @@ public class GameManager : MonoBehaviour
 
             int randomIndex = Random.Range(0, otherObjects.Count);
 
-            return otherObjects[randomIndex];
+            selectedObject = otherObjects[randomIndex];
         }
+
+        return selectedObject;
     }
 
     public void RemoveObjet(PartObject obj)
@@ -177,7 +184,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Timer ()
     {
-        timerCurTime = m_eggTimerDuration;
+        timerCurTime = 0f;
+        timerCurTime += m_eggTimerDuration;
 
         while (timerCurTime > 0f)
         {
@@ -190,12 +198,14 @@ public class GameManager : MonoBehaviour
 
     void TimerEnd()
     {
-        m_eggScript.Reset();
+        Debug.Log("Egg reset");
+        //m_eggScript.Reset();
     }
 
     public void StopTimer()
     {
         StopCoroutine(curTimer);
+        timerCurTime = 0f;
     }
 
     public void IncreaseTimer()
