@@ -7,7 +7,7 @@ public class Movement : MonoBehaviour
 	private Vector3 movement, inputDir;
 	public float speed;
 
-	public GameObject camera;
+	public GameObject targetCamera;
 	public float offset, leftBorder, rightBorder;
 	private float deadZoneLeft, deadZoneRight, camX;
 
@@ -22,19 +22,19 @@ public class Movement : MonoBehaviour
 
 	private void MoveCamera(Vector3 movement)
     {
-		camX = camera.transform.position.x;
+		camX = targetCamera.transform.position.x;
 		deadZoneLeft = camX - offset;
 		deadZoneRight = camX + offset;
 
-		float height = 2f * camera.GetComponent<Camera>().orthographicSize;
-		float width = height * camera.GetComponent<Camera>().aspect;
+		float height = 2f * targetCamera.GetComponent<Camera>().orthographicSize;
+		float width = height * targetCamera.GetComponent<Camera>().aspect;
 
 
 		if (camX - width / 2 >= leftBorder)
 		{
 			if (this.transform.position.x <= deadZoneLeft)
 			{
-				camera.transform.position += movement;
+				targetCamera.transform.position += movement;
 			}
         }
 
@@ -42,7 +42,7 @@ public class Movement : MonoBehaviour
         {
 			if (this.transform.position.x >= deadZoneRight)
 			{
-				camera.transform.position += movement;
+				targetCamera.transform.position += movement;
 			}
 		}
 	}

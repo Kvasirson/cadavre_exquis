@@ -11,11 +11,28 @@ public class GameManager : MonoBehaviour
     float m_favoriteAttributeChance;
 
     [SerializeField]
+    int m_basePartSoldValue;
+
+    [SerializeField]
+    float m_eggTimerDuration;
+
+    [SerializeField]
+    float m_eggTimerBonusDuration;
+
+    [SerializeField]
     List<ShopScript> m_shopsScripts;
+
+    [SerializeField]
+    EggScript m_eggScript;
 
     static GameManager _instance;
 
+    public float _gold;
+
     List<PartTypes> _usedTypes;
+
+    float timerCurTime;
+    Coroutine curTimer;
 
     PartObject[] _objectsPool;
     List<PartObject> _tempObjectsPool;
@@ -30,16 +47,27 @@ public class GameManager : MonoBehaviour
         get { return _usedTypes; }
     }
 
+    public int BasePartSoldValue
+    {
+        get { return m_basePartSoldValue; }
+    }
+
     private void Awake()
     {
         _instance = this;
         _objectsPool = CreatePool();
+        ResetCurPool();
+    }
+
+    private void Start()
+    {
+        UpdateShops();
     }
 
     #region Shops
     PartObject[] CreatePool()
     {
-        string[] partObjectsGUIDs = AssetDatabase.FindAssets("t:PartObject", new[] { "Assets/ScriptableObjects" });
+        string[] partObjectsGUIDs = AssetDatabase.FindAssets("t:PartObject", new[] { "Assets/Tom/ScriptableObjects" });
 
         PartObject[] pool = new PartObject[partObjectsGUIDs.Length];
 
@@ -56,6 +84,8 @@ public class GameManager : MonoBehaviour
 
     public void UpdateShops()
     {
+        curTimer = StartCoroutine(Timer());
+
         GetAvailableObjects();
 
         foreach (ShopScript shop in m_shopsScripts)
@@ -70,12 +100,16 @@ public class GameManager : MonoBehaviour
         foreach (PartObject obj in _tempObjectsPool)
         {
             bool isExcluded = false;
-            foreach (PartTypes excludedType in UsedTypes)
+
+            if (UsedTypes != null)
             {
-                if (obj.ObjectType == excludedType)
+                foreach (PartTypes excludedType in UsedTypes)
                 {
-                    isExcluded = true;
-                    break;
+                    if (obj.ObjectType == excludedType)
+                    {
+                        isExcluded = true;
+                        break;
+                    }
                 }
             }
 
@@ -91,7 +125,9 @@ public class GameManager : MonoBehaviour
     PartObject GetObject(PartsAttributes favoriteAttribute)
     {
         List<PartObject> favoriteObjects = new List<PartObject>();
-        List<PartObject> otherObjects = _tempObjectsPool;
+        PartObject[] tempOtherObjects = new PartObject[_tempObjectsPool.Count];
+        _tempObjectsPool.CopyTo(tempOtherObjects);
+        List<PartObject> otherObjects = new List<PartObject>(tempOtherObjects);
 
         foreach (PartObject obj in _tempObjectsPool)
         {
@@ -105,12 +141,22 @@ public class GameManager : MonoBehaviour
         float chance = Random.Range(0f, 1f);
         if (chance < m_favoriteAttributeChance)
         {
+            if (favoriteObjects.Count <= 0)
+            {
+                return null;
+            }
+
             int randomIndex = Random.Range(0, favoriteObjects.Count);
 
             return favoriteObjects[randomIndex];
         }
         else
         {
+            if (otherObjects.Count <= 0)
+            {
+                return null;
+            }
+
             int randomIndex = Random.Range(0, otherObjects.Count);
 
             return otherObjects[randomIndex];
@@ -122,9 +168,37 @@ public class GameManager : MonoBehaviour
         _tempObjectsPool.Remove(obj);
     }
 
-    void ResetCurPool()
+    public void ResetCurPool()
     {
         _tempObjectsPool = new List<PartObject>(_objectsPool);
     }
     #endregion
+
+    IEnumerator Timer ()
+    {
+        timerCurTime = m_eggTimerDuration;
+
+        while (timerCurTime > 0f)
+        {
+            timerCurTime -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        TimerEnd();
+    }
+
+    void TimerEnd()
+    {
+        m_eggScript.Reset();
+    }
+
+    public void StopTimer()
+    {
+        StopCoroutine(curTimer);
+    }
+
+    public void IncreaseTimer()
+    {
+        timerCurTime += m_eggTimerBonusDuration;
+    }
 }

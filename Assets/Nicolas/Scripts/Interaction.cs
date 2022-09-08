@@ -2,43 +2,73 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum State{EMPTY, EGG, LIMB}
+public enum State{EMPTY, EGG, PART}
 
 public class Interaction : MonoBehaviour
 {
-	[SerializeField] private bool isInRange;
-	[SerializeField] private GameObject pnj;
-	[SerializeField] private State state;
+	GameManager _gameManager;
+
+	private bool _isInRange;
+	private State _state;
+
+	private ShopScript _vendor;
+	private EggScript _egg;
+
+	PartObject _heldPart;
+
 
     private void Start()
     {
-		isInRange = false;
-		pnj = null;
-		state = State.EMPTY;
+		_gameManager = GameManager.GetInstance;
+
+		_isInRange = false;
+		_vendor = null;
+		_state = State.EMPTY;
     }
 
     private void Update()
 	{
         if (Input.GetButtonDown("Interact"))
         {
-			if (isInRange)
+			if (_isInRange)
 			{
-				switch (state)
+				switch (_state)
 				{
 					case State.EMPTY:
-						Debug.Log("openShopMenu()");
+						if(_vendor != null)
+                        {
+							BuyPart();
+                        }
+						else if(_egg != null)
+                        {
+							HoldEgg();
+                        }
 						break;
 
 					case State.EGG:
-						Debug.Log("openSellMenu()"); ;
+						if (_vendor != null)
+						{
+							SellEgg();
+							
+						}
+						else if (_egg != null)
+						{
+							PutEggDown();
+						}
 						break;
 
-					case State.LIMB:
-						Debug.Log("can't interact");
+					case State.PART:
+						if (_vendor != null)
+						{
+							break;
+						}
+						else if (_egg != null)
+						{
+							UsePart();
+						}
 						break;
 
 					default:
-						Debug.Log("default");
 						break;
 				}
 			}
@@ -47,23 +77,69 @@ public class Interaction : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-		if (!isInRange)
+		if (!_isInRange)
 		{
 			if (col.tag == "pnj")
 			{
-				isInRange = true;
-				pnj = col.transform.gameObject;
+				_isInRange = true;
+				_vendor = col.transform.GetComponent<ShopScript>();
 				Debug.Log("collide");
-
 			}
+			else if (col.tag == "egg")
+            {
+				_isInRange = true;
+				_egg = col.transform.GetComponent<EggScript>();
+            }
 		}
     }
 
     public void OnTriggerExit2D(Collider2D col)
     {
-		isInRange = false;
-		pnj = null;
+		_isInRange = false;
+		_vendor = null;
+
+		if(_state != State.EGG)
+        {
+			_egg = null;
+		}
+
 		Debug.Log("exit");
 	}
 
+    #region Interaction Outcomes
+    void HoldEgg()
+    {
+		_state = State.EGG;
+	}
+
+	void PutEggDown()
+    {
+		_state = State.EMPTY;
+    }
+
+	void SellEgg()
+    {
+		_state = State.EMPTY;
+		_gameManager._gold += _egg.SoldValue(_vendor.FavoriteAttribute);
+		_gameManager.ResetCurPool();
+		_egg.Reset();
+		_egg = null;
+	}
+
+	void BuyPart()
+    {
+		_state = State.PART;
+		_gameManager._gold += - _vendor.ObjectPrice;
+		_heldPart = _vendor.DisplayedObject;
+		_gameManager.RemoveObjet(_heldPart);
+		_gameManager.UpdateShops();
+    }
+
+	void UsePart()
+    {
+		_state = State.EMPTY;
+		_egg.AddPart(_heldPart);
+		_heldPart = null;
+	}
+    #endregion
 }
