@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab85d83af827ccf48b3a003938803fad, type: 3}
   m_Name: cat_torso
   m_EditorClassIdentifier: 
-  m_partSprite: {fileID: 0}
+  m_partSprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_partType: 0
-  m_cutenessValue: 0
-  m_tastinessValue: 0
-  m_strengthValue: 0
-  m_exotismValue: 0
+  m_cutenessValue: 0.4
+  m_tastinessValue: 0.2
+  m_strengthValue: 0.25
+  m_exotismValue: 0.15
