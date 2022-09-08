@@ -83,6 +83,11 @@ public class Interaction : MonoBehaviour
 			{
 				_isInRange = true;
 				_vendor = col.transform.GetComponent<ShopScript>();
+
+				if (_state == State.EMPTY)
+                {
+					_vendor.ShowDisplayedObject(true);
+				}
 			}
 			else if (col.tag == "egg")
             {
@@ -94,13 +99,22 @@ public class Interaction : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D col)
     {
-		_isInRange = false;
-		_vendor = null;
+		if(_vendor != null)
+        {
+			if (_state == State.EMPTY)
+            {
+				_vendor.ShowDisplayedObject(false);
+			}
+
+			_vendor = null;
+		}
 
 		if(_state != State.EGG)
         {
 			_egg = null;
 		}
+
+		_isInRange = false;
 	}
 
     #region Interaction Outcomes
@@ -121,7 +135,7 @@ public class Interaction : MonoBehaviour
 
 		if(_gameManager._gold < 0)
         {
-			_gameManager.Loose();
+			_gameManager.GameEnd();
         }
 
 		_gameManager.ResetCurPool();
@@ -134,6 +148,7 @@ public class Interaction : MonoBehaviour
 		_state = State.PART;
 		_gameManager._gold += - _vendor.ObjectPrice;
 		_heldPart = _vendor.DisplayedObject;
+		_vendor.ShowDisplayedObject(false);
 		_gameManager.RemoveObjet(_heldPart);
     }
 

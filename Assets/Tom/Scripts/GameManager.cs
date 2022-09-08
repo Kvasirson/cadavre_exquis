@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     float m_eggTimerBonusDuration;
 
+    [Header("UI")]
+    [SerializeField]
+    GameObject m_endScreen;
+
     [Header("Scripts")]
     [SerializeField]
     List<ShopScript> m_shopsScripts;
@@ -82,6 +86,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+        m_endScreen.SetActive(false);
         _objectsPool = CreatePool();
         ResetCurPool();
     }
@@ -223,7 +228,7 @@ public class GameManager : MonoBehaviour
     {
         if (_gold <= 0)
         {
-            Loose();
+            GameEnd();
             return;
         }
 
@@ -262,12 +267,12 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
-        Loose();
+        GameEnd();
     }
     #endregion
 
-    public void Loose()
+    public void GameEnd()
     {
-
+        m_endScreen.SetActive(true);
     }
 }

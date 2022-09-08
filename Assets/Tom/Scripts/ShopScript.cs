@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopScript : MonoBehaviour
 {
@@ -8,7 +9,12 @@ public class ShopScript : MonoBehaviour
     PartsAttributes m_favoriteAttribute;
 
     [SerializeField]
+    GameObject m_objectDisplay;
+
+    [SerializeField]
     SpriteRenderer m_objectSpriteRend;
+    [SerializeField]
+    Text m_objectFlavorText;
 
     PartObject _displayedObject;
 
@@ -39,12 +45,18 @@ public class ShopScript : MonoBehaviour
     {
         if(_displayedObject != null)
         {
-            m_objectSpriteRend.sprite = _displayedObject.partSprite;
+            m_objectSpriteRend.sprite = _displayedObject.PartSprite;
+            m_objectFlavorText.text = _displayedObject.FlavorText;
             _objectPrice = Random.Range(0, 100);
         }
         else
         {
             m_objectSpriteRend = null;
         }
+    }
+
+    public void ShowDisplayedObject(bool showDisplay)
+    {
+        m_objectDisplay.SetActive(showDisplay);
     }
 }
