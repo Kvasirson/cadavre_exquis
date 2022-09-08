@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
 	public float offset, leftBorder, rightBorder;
 	private float deadZoneLeft, deadZoneRight, camX;
 
+	public Animator animator;
+
     void FixedUpdate()
 	{
 		inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
