@@ -59,7 +59,9 @@ public class EggScript : MonoBehaviour
                 break;
         }
 
-        _gameManager.UsedTypes.Add(type);
+        Debug.Log(type);
+        
+        _gameManager._usedTypes.Add(type);
         _gameManager.UpdateShops();
     }
 

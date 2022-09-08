@@ -132,7 +132,6 @@ public class Interaction : MonoBehaviour
 		_gameManager._gold += - _vendor.ObjectPrice;
 		_heldPart = _vendor.DisplayedObject;
 		_gameManager.RemoveObjet(_heldPart);
-		_gameManager.UpdateShops();
     }
 
 	void UsePart()

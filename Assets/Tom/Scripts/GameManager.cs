@@ -29,7 +29,8 @@ public class GameManager : MonoBehaviour
 
     public float _gold;
 
-    List<PartTypes> _usedTypes;
+    [HideInInspector]
+    public List<PartTypes> _usedTypes;
 
     float timerCurTime;
     Coroutine curTimer;
