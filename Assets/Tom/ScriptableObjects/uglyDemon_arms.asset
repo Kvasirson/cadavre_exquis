@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: uglyDemon_arms
   m_EditorClassIdentifier: 
   m_partSprite: {fileID: 0}
-  m_partType: 0
-  m_cutenessValue: 0
-  m_tastinessValue: 0
-  m_strengthValue: 0
-  m_exotismValue: 0
+  m_partType: 2
+  m_cutenessValue: 0.25
+  m_tastinessValue: 0.25
+  m_strengthValue: 0.25
+  m_exotismValue: 0.25

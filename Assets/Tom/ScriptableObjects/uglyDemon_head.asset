@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_partSprite: {fileID: 0}
   m_partType: 0
-  m_cutenessValue: 0
-  m_tastinessValue: 0
-  m_strengthValue: 0
-  m_exotismValue: 0
+  m_cutenessValue: 0.1
+  m_tastinessValue: 0.1
+  m_strengthValue: 0.1
+  m_exotismValue: 0.7
