@@ -35,11 +35,11 @@ public class Interaction : MonoBehaviour
 				switch (_state)
 				{
 					case State.EMPTY:
-						if(_vendor != null && _gameManager._eggIscomplete != true)
+						if(_vendor != null && _vendor.DisplayedObject != null && _gameManager._gold > 0 && _gameManager._eggIscomplete != true)
                         {
 							BuyPart();
                         }
-						else if(_egg != null)
+						else if(_egg != null && !_egg.IsEmpty)
                         {
 							HoldEgg();
                         }
@@ -118,6 +118,12 @@ public class Interaction : MonoBehaviour
     {
 		_state = State.EMPTY;
 		_gameManager._gold += _egg.SoldValue(_vendor.FavoriteAttribute);
+
+		if(_gameManager._gold < 0)
+        {
+			_gameManager.Loose();
+        }
+
 		_gameManager.ResetCurPool();
 		_egg.Reset();
 		_egg = null;
@@ -136,6 +142,7 @@ public class Interaction : MonoBehaviour
 		_state = State.EMPTY;
 		_egg.AddPart(_heldPart);
 		_heldPart = null;
+		_gameManager.IncreaseEggTimer();
 	}
     #endregion
 }

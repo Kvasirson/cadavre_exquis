@@ -39,7 +39,7 @@ public class EggScript : MonoBehaviour
         if (EggCompleteCheck())
         {
             _gameManager._eggIscomplete = true;
-            _gameManager.StopTimer();
+            _gameManager.StopEggTimer();
             _gameManager._usedTypes.Clear();
         }
         else
@@ -54,7 +54,6 @@ public class EggScript : MonoBehaviour
     {
         float multiplier = 0f;
         int partsNumb = 0;
-        int baseSoldValue = _gameManager.BasePartSoldValue;
 
         foreach (PartObject part in _slots)
         {
@@ -65,8 +64,29 @@ public class EggScript : MonoBehaviour
             }
         }
 
+        int soldValue = _gameManager.GetSoldValue(partsNumb);
+
         multiplier /= partsNumb;
-        return multiplier*baseSoldValue;
+        return multiplier*soldValue;
+    }
+
+    public bool IsEmpty
+    {
+        get
+        {
+            bool isEmpty = true;
+
+            foreach (PartObject part in _slots)
+            {
+                if (part != null)
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
+
+            return isEmpty;
+        }
     }
 
     bool EggCompleteCheck()
@@ -74,8 +94,6 @@ public class EggScript : MonoBehaviour
         bool emptySlot = false;
         for (int i = 0; i < _slots.Length; i++)
         {
-            Debug.Log(_slots[i]);
-
             if(_slots[i] == null)
             {
                 emptySlot = true;
@@ -93,6 +111,6 @@ public class EggScript : MonoBehaviour
             _slots[i] = null;
         }
 
-        _gameManager.StopTimer();
+        _gameManager.StopEggTimer();
     }
 }
