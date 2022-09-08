@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab85d83af827ccf48b3a003938803fad, type: 3}
   m_Name: bat_arms
   m_EditorClassIdentifier: 
-  m_partSprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_partSprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_partType: 2
   m_cutenessValue: 0.15
   m_tastinessValue: 0.35

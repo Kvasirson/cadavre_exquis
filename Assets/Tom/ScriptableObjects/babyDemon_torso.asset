@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab85d83af827ccf48b3a003938803fad, type: 3}
   m_Name: babyDemon_torso
   m_EditorClassIdentifier: 
-  m_partSprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_partSprite: {fileID: 21300000, guid: dcea51d6065d64246aeec467afeff684, type: 3}
   m_partType: 1
   m_cutenessValue: 0.15
   m_tastinessValue: 0.15
