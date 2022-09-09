@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
         set 
         { 
             _gold = value; 
-            m_goldCountDisplay.text = value.ToString();
+            m_goldCountDisplay.text = "Gold : " + value.ToString();
         }
     }
 
@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(GlobalTimer());
+        Gold = _gold;
         UpdateShops();
     }
 
@@ -239,7 +240,7 @@ public class GameManager : MonoBehaviour
         while (eggTimerCurTime > 0f)
         {
             eggTimerCurTime -= Time.deltaTime;
-            m_eggTimerDisplay.text = eggTimerCurTime.ToString();
+            m_eggTimerDisplay.text = "Egg Timer : " + eggTimerCurTime.ToString().Substring(0, 2);
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
@@ -286,7 +287,7 @@ public class GameManager : MonoBehaviour
         while (curTime > 0f)
         {
             curTime -= Time.deltaTime;
-            m_globalTimerDisplay.text = curTime.ToString();
+            m_globalTimerDisplay.text = "Global Timer : " + curTime.ToString().Substring(0, 2);
             yield return new WaitForSeconds(Time.deltaTime);
         }
 

@@ -112,7 +112,7 @@ public class EggScript : MonoBehaviour
 
         return !emptySlot;
     }
-
+    
     public void Reset()
     {
         for(int i = 0; i < _slots.Length; i++)
