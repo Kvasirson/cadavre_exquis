@@ -35,7 +35,7 @@ public class Interaction : MonoBehaviour
 				switch (_state)
 				{
 					case State.EMPTY:
-						if(_vendor != null && _vendor.DisplayedObject != null && _gameManager._gold > 0 && _gameManager._eggIscomplete != true)
+						if(_vendor != null && _vendor.DisplayedObject != null && _gameManager.Gold > 0 && _gameManager._eggIscomplete != true)
                         {
 							BuyPart();
                         }
@@ -138,7 +138,7 @@ public class Interaction : MonoBehaviour
 		_state = State.EMPTY;
 		_gameManager.Gold += _egg.SoldValue(_vendor.FavoriteAttribute);
 
-		if(_gameManager._gold < 0)
+		if(_gameManager.Gold < 0)
         {
 			_gameManager.GameEnd();
         }
@@ -151,7 +151,7 @@ public class Interaction : MonoBehaviour
 	void BuyPart()
     {
 		_state = State.PART;
-		_gameManager._gold += - _vendor.ObjectPrice;
+		_gameManager.Gold += - _vendor.ObjectPrice;
 		_heldPart = _vendor.DisplayedObject;
 		_vendor.ShowDisplayedObject(false);
 		_gameManager.RemoveObjet(_heldPart);

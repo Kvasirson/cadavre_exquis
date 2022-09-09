@@ -7,7 +7,7 @@ public class SpriteLayering : MonoBehaviour
     GameObject m_player;
 
     [SerializeField]
-    Sprite m_playerSprite;
+    SpriteRenderer m_playerSprite;
 
     SpriteRenderer m_spriteRenderer;
     SortingGroup m_playerRenderer;
@@ -20,16 +20,16 @@ public class SpriteLayering : MonoBehaviour
 
     void Update()
     {
-        float playerYPosition = m_player.transform.position.y - m_playerSprite.bounds.extents.y;
+        float playerYPosition = m_player.transform.position.y - m_playerSprite.sprite.bounds.extents.y;
         float spriteYPosition = transform.position.y - m_spriteRenderer.sprite.bounds.extents.y;
 
         if(playerYPosition > spriteYPosition)
         {
-            m_spriteRenderer.sortingLayerID = m_playerRenderer.sortingLayerID - 1;
+            m_spriteRenderer.sortingOrder = m_playerRenderer.sortingOrder + 1;
         }
         else
         {
-            m_spriteRenderer.sortingLayerID = m_playerRenderer.sortingLayerID + 1;
+            m_spriteRenderer.sortingOrder = m_playerRenderer.sortingOrder - 1;
         }
     }
 }

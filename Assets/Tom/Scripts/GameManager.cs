@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
     public int m_base5PartsSoldValue;
 
     [Header("Base Gold")]
-    public float _gold;
+    [SerializeField]
+    float _startingGold;
 
     [SerializeField]
     float m_globalTimerDuration;
@@ -77,10 +78,10 @@ public class GameManager : MonoBehaviour
 
     public float Gold
     {
-        get { return _gold; }
+        get { return _startingGold; }
         set 
         { 
-            _gold = value; 
+            _startingGold = value; 
             m_goldCountDisplay.text = "Gold : " + value.ToString();
         }
     }
@@ -115,8 +116,16 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(GlobalTimer());
-        Gold = _gold;
+        Gold = _startingGold;
         UpdateShops();
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Start"))
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 
     #region Shops
@@ -249,7 +258,7 @@ public class GameManager : MonoBehaviour
 
     void EggTimerEnd()
     {
-        if (_gold <= 0)
+        if (_startingGold <= 0)
         {
             GameEnd();
             return;

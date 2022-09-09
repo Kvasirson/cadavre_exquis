@@ -8,13 +8,9 @@ public class EndScreen : MonoBehaviour
 
     GameManager _gameManager;
 
-    void Start()
-    {
-        _gameManager = GameManager.GetInstance;
-    }
-
     private void OnEnable()
     {
-        m_score.text = _gameManager._gold.ToString();
+        _gameManager = GameManager.GetInstance;
+        m_score.text = "Score : " + _gameManager.Gold.ToString();
     }
 }
