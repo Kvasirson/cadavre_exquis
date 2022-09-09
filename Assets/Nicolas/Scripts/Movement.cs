@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-	private Vector3 movement, inputDir;
+	private Vector3 movement, inputDir, camX;
 	public float speed;
 
 	public GameObject targetCamera;
 	public float offset, leftBorder, rightBorder;
-	private float deadZoneLeft, deadZoneRight, camX;
+	private float deadZoneLeft, deadZoneRight,deadZoneUp, deadZoneBottom;
 
 	public Animator animatorBody, animatorArms;
 	public SpriteRenderer body, arms;
@@ -58,28 +58,17 @@ public class Movement : MonoBehaviour
 
 	private void MoveCamera(Vector3 movement)
     {
-		camX = targetCamera.transform.position.x;
-		deadZoneLeft = camX - offset;
-		deadZoneRight = camX + offset;
+		camX = targetCamera.transform.position;
+		deadZoneLeft = camX.x - offset;
+		deadZoneRight = camX.x + offset;
+		deadZoneBottom = camX.y - offset/2;
+		deadZoneUp = camX.y + offset/2;
 
 		float height = 2f * targetCamera.GetComponent<Camera>().orthographicSize;
 		float width = height * targetCamera.GetComponent<Camera>().aspect;
 
 
-		if (camX - width / 2 >= leftBorder)
-		{
-			if (this.transform.position.x <= deadZoneLeft)
-			{
-				targetCamera.transform.position += movement;
-			}
-        }
-
-		if(camX + width / 2 <= rightBorder)
-        {
-			if (this.transform.position.x >= deadZoneRight)
-			{
-				targetCamera.transform.position += movement;
-			}
-		}
+		if (this.transform.position.x <= deadZoneLeft || this.transform.position.x >= deadZoneRight) { targetCamera.transform.position += new Vector3(movement.x, 0); }
+		if (this.transform.position.y <= deadZoneBottom || this.transform.position.y >= deadZoneUp) { targetCamera.transform.position += new Vector3(0, movement.y); }
 	}
 }
