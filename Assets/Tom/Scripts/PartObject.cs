@@ -7,9 +7,6 @@ public class PartObject : ScriptableObject
     Sprite m_partSprite;
 
     [SerializeField]
-    string m_flavorText;
-
-    [SerializeField]
     PartTypes m_partType;
 
     [Header("Attributes")]
@@ -53,11 +50,6 @@ public class PartObject : ScriptableObject
     public Sprite PartSprite
     {
         get { return m_partSprite; }
-    }
-
-    public string FlavorText
-    {
-        get{ return m_flavorText; }
     }
 
     public PartTypes ObjectType

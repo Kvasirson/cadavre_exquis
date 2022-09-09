@@ -131,7 +131,7 @@ public class Interaction : MonoBehaviour
 	void SellEgg()
     {
 		_state = State.EMPTY;
-		_gameManager._gold += _egg.SoldValue(_vendor.FavoriteAttribute);
+		_gameManager.Gold += _egg.SoldValue(_vendor.FavoriteAttribute);
 
 		if(_gameManager._gold < 0)
         {
