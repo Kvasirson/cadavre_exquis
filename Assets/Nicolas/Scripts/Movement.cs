@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-	private Vector3 movement, inputDir, camX;
+	private Vector3 movement, inputDir, cam;
 	public float speed;
 
 	public GameObject targetCamera;
-	public float offset, leftBorder, rightBorder;
-	private float deadZoneLeft, deadZoneRight,deadZoneUp, deadZoneBottom;
+	public float offset;
+	private float deadZoneLeft, deadZoneRight, deadZoneUp, deadZoneBottom;
 
 	public Animator animatorBody, animatorArms;
-	public SpriteRenderer body, arms;
+	public SpriteRenderer body, arms, map;
 
     void FixedUpdate()
 	{
 		inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 		movement = speed * Time.deltaTime * inputDir.normalized;
 
-		this.transform.position = this.transform.position + movement;
+		this.GetComponent<Rigidbody2D>().MovePosition(this.transform.position + movement);
 		MoveCamera(movement);
 
 
@@ -58,17 +58,44 @@ public class Movement : MonoBehaviour
 
 	private void MoveCamera(Vector3 movement)
     {
-		camX = targetCamera.transform.position;
-		deadZoneLeft = camX.x - offset;
-		deadZoneRight = camX.x + offset;
-		deadZoneBottom = camX.y - offset/2;
-		deadZoneUp = camX.y + offset/2;
+		cam = targetCamera.transform.position;
+		deadZoneLeft = cam.x - offset;
+		deadZoneRight = cam.x + offset;
+		deadZoneBottom = cam.y - offset/2;
+		deadZoneUp = cam.y + offset/2;
 
 		float height = 2f * targetCamera.GetComponent<Camera>().orthographicSize;
 		float width = height * targetCamera.GetComponent<Camera>().aspect;
 
 
-		if (this.transform.position.x <= deadZoneLeft || this.transform.position.x >= deadZoneRight) { targetCamera.transform.position += new Vector3(movement.x, 0); }
-		if (this.transform.position.y <= deadZoneBottom || this.transform.position.y >= deadZoneUp) { targetCamera.transform.position += new Vector3(0, movement.y); }
+		float leftBorder = map.transform.position.x - map.bounds.extents.x;
+		float rightBorder = map.transform.position.x + map.bounds.extents.x;
+		float bottomBorder = map.transform.position.y - map.bounds.extents.y;
+		float upBorder = map.transform.position.y + map.bounds.extents.y;
+
+		float camLeft = cam.x - width / 2;
+		float camRight = cam.x + width / 2;
+		float camUp = cam.y + height / 2;
+		float camBottom = cam.y - height / 2;
+
+
+		Debug.Log("cam" + camUp);
+
+		if (camLeft>=leftBorder)
+        {
+			if (this.transform.position.x <= deadZoneLeft)	{ targetCamera.transform.position += new Vector3(movement.x, 0); }
+        }
+		if (camRight <= rightBorder) 
+		{
+			if (this.transform.position.x >= deadZoneRight)	{ targetCamera.transform.position += new Vector3(movement.x, 0); } 
+		}
+		if (camUp <= upBorder) 
+		{
+			if (this.transform.position.y >= deadZoneUp)	{ targetCamera.transform.position += new Vector3(0, movement.y); } 
+		}
+		if (camBottom >= bottomBorder) 
+		{ 
+			if (this.transform.position.y <= deadZoneBottom){ targetCamera.transform.position += new Vector3(0, movement.y); } 
+		}
 	}
 }

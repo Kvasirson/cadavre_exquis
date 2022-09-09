@@ -730,13 +730,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 100
   targetCamera: {fileID: 252357891}
-  offset: -10
-  leftBorder: -15
-  rightBorder: 10
+  offset: 100
   animatorBody: {fileID: 0}
   animatorArms: {fileID: 0}
   body: {fileID: 0}
   arms: {fileID: 0}
+  map: {fileID: 0}
 --- !u!4 &483143576
 Transform:
   m_ObjectHideFlags: 0
