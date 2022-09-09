@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class GameManager : MonoBehaviour
 {
@@ -63,6 +66,7 @@ public class GameManager : MonoBehaviour
     float eggTimerCurTime;
     Coroutine curEggTimer;
 
+    [SerializeField]
     PartObject[] _objectsPool;
     List<PartObject> _tempObjectsPool;
 
@@ -109,7 +113,7 @@ public class GameManager : MonoBehaviour
     {
         _instance = this;
         m_endScreen.SetActive(false);
-        _objectsPool = CreatePool();
+        //_objectsPool = CreatePool();
         ResetCurPool();
     }
 
@@ -129,8 +133,10 @@ public class GameManager : MonoBehaviour
     }
 
     #region Shops
-    PartObject[] CreatePool()
+   /* PartObject[] CreatePool()
     {
+#if UNITY_EDITOR
+
         string[] partObjectsGUIDs = AssetDatabase.FindAssets("t:PartObject", new[] { "Assets/Tom/ScriptableObjects" });
 
         PartObject[] pool = new PartObject[partObjectsGUIDs.Length];
@@ -142,9 +148,10 @@ public class GameManager : MonoBehaviour
             PartObject partObject = AssetDatabase.LoadAssetAtPath<PartObject>(path);
             pool[i] = partObject;
         }
+#endif
 
         return pool;
-    }
+    }*/
 
     public void UpdateShops()
     {
