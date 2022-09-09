@@ -123,6 +123,303 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &963716398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 963716400}
+  - component: {fileID: 963716399}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &963716399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963716398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7754166b9b1d64190904158949d080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Bruit achat
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: a00060c5fe4989a4b8465fbabb315b1f, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.6
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit Bonne vente
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: 7acd06853685e0d46b8f2d966a595ef3, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit Creature BabyDemon
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: c939c7d181ca4274a848d16ff6a942b3, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit Creature Bat
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: f848681433e367648b51fbc1b943d3a5, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit Creature Chat
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: 454366017e72ee946aa7de17ffd3a31d, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit Creature Cochon
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: f65756ac86dce25489c0b81326cdbfa0, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit Creature uglydemon
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: a6f0f8f847f2ab24cbb0b92baeda8c83, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit defaite
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: f30a5a83e55bb134cb0088af8775e8fe, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 1
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit deplacement
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: 9d488276353145748a7b17b5cd87ae30, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit Gerald Departrois
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: ab5ecf549d8d1c24d8f6da1482c652f8, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit Queen Mulon
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: af6ef9850bddb3e4daa3366e191e1809, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit Rob Boss
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: b481b82d9199ed4479c7d1d343eefeaf, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 1
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit Sir Bone obo
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: 8a0b5bc57406c6d4b8f66ef0b3eeb49d, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.3
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit Mauvaise Vente
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: 572e5b3e69d042040863c8e398ff19f2, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit Moyenne Vente
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: 1bb8e62c4b36ed744a32924e900743bd, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit oeuf eclosion
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: 8d23dac13efb83844a292c6282d610ad, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit oeuf mange
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: de71286e93691bc4e9d3e64910de125c, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit reset item marche
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: 9f449a7f635a62c408bb6c5191d77a47, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit Timer Generale Fin
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: 9c4cd67570f413a4e8fcede0efa5dfe9, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.4
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: Bruit Timer oeuf fin
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: 184a690049769f449a9c83c225a4dfa5, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+  - name: "Musique d'ambiance g\xE9n\xE9ral"
+    audioType: 0
+    clips:
+    - {fileID: 8300000, guid: 876c46652e7b4974fb15fee99f566566, type: 3}
+    maxInstNb: 1
+    curInstNb: 0
+    volume: 0.6
+    pitch: 0
+    loop: 1
+    playOnAwake: 1
+    source: {fileID: 0}
+    hasMultipleClips: 0
+--- !u!4 &963716400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963716398}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.58306795, y: -0.44921988, z: 4.3573837}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1387482475
 GameObject:
   m_ObjectHideFlags: 0
