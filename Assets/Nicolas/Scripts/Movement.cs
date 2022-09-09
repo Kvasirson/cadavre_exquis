@@ -11,21 +11,49 @@ public class Movement : MonoBehaviour
 	public float offset, leftBorder, rightBorder;
 	private float deadZoneLeft, deadZoneRight, camX;
 
-	public Animator animator;
+	public Animator animatorBody, animatorArms;
+	public SpriteRenderer body, arms;
 
     void FixedUpdate()
 	{
 		inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-		movement = inputDir.normalized * speed * Time.deltaTime;
+		movement = speed * Time.deltaTime * inputDir.normalized;
 
 		this.transform.position = this.transform.position + movement;
 		MoveCamera(movement);
 
-        if (inputDir.x > 0) { this.GetComponent<SpriteRenderer>().flipX = true; }
-        else { this.GetComponent<SpriteRenderer>().flipX = false; }
-		animator.SetFloat("horizontal", inputDir.x);
-		animator.SetFloat("vertical", inputDir.y);
-		animator.SetFloat("speed", inputDir.sqrMagnitude);
+
+
+        if (inputDir.x > 0) { 
+			body.GetComponent<SpriteRenderer>().flipX = true;
+			arms.GetComponent<SpriteRenderer>().flipX = true;
+		}
+        else 
+		{
+			body.GetComponent<SpriteRenderer>().flipX = false;
+			arms.GetComponent<SpriteRenderer>().flipX = false;
+		}
+
+		if(inputDir.y > 0)
+        {
+			arms.sortingOrder = 0;
+			body.sortingOrder = 1;
+		}
+        else
+        {
+			arms.sortingOrder = 1;
+			body.sortingOrder = 0;
+		}
+
+		animatorBody.SetFloat("horizontal", inputDir.x);
+		animatorBody.SetFloat("vertical", inputDir.y);
+		animatorBody.SetFloat("speed", inputDir.sqrMagnitude);
+
+		animatorArms.SetFloat("horizontal", inputDir.x);
+		animatorArms.SetFloat("vertical", inputDir.y);
+		animatorArms.SetFloat("speed", inputDir.sqrMagnitude);
+
+		animatorArms.SetBool("holding", this.GetComponent<Interaction>().state == State.EGG || this.GetComponent<Interaction>().state == State.PART);
 	}
 
 	private void MoveCamera(Vector3 movement)
