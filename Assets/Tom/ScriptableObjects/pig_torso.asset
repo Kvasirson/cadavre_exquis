@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab85d83af827ccf48b3a003938803fad, type: 3}
   m_Name: pig_torso
   m_EditorClassIdentifier: 
-  m_partSprite: {fileID: 21300000, guid: 878402a7878c2c248b4f2c976f228ccf, type: 3}
+  m_partSprite: {fileID: 21300000, guid: 50f85e5f5731e0443b164f2d28cbb3e5, type: 3}
   m_partType: 1
   m_cutenessValue: 0.1
   m_tastinessValue: 0.7
