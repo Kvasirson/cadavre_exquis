@@ -542,7 +542,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 7
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 547643950, guid: 9512f1094f3afaf44bf258020c5b4b79, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -565,8 +565,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6f59a58fffac74b9c7a09fefda1041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  targetCamera: {fileID: 0}
+  speed: 100
+  targetCamera: {fileID: 252357891}
   offset: 5
   leftBorder: -15
   rightBorder: 10
@@ -926,6 +926,14 @@ PrefabInstance:
     - target: {fileID: 5252888969659423115, guid: 9b80aab6e8755ec49962cde057817c8f, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5252888969659423117, guid: 9b80aab6e8755ec49962cde057817c8f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 5252888969659423117, guid: 9b80aab6e8755ec49962cde057817c8f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b80aab6e8755ec49962cde057817c8f, type: 3}
