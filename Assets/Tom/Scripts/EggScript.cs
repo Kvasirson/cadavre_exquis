@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class EggScript : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject m_eggDisplay;
+
+    [SerializeField]
+    private GameObject m_creatureDisplay;
+
     PartObject[] _slots = new PartObject[5];
 
     GameManager _gameManager;
@@ -41,6 +47,9 @@ public class EggScript : MonoBehaviour
             _gameManager._eggIscomplete = true;
             _gameManager.StopEggTimer();
             _gameManager._usedTypes.Clear();
+
+            DisplayEgg(false);
+            m_creatureDisplay.SetActive(true);
         }
         else
         {
@@ -112,5 +121,19 @@ public class EggScript : MonoBehaviour
         }
 
         _gameManager.StopEggTimer();
+
+        DisplayEgg(true);
+    }
+
+    public void DisplayEgg(bool display)
+    {
+        if (m_creatureDisplay)
+        {
+            m_creatureDisplay.SetActive(false);
+        }
+        else
+        {
+            m_eggDisplay.SetActive(display);
+        }
     }
 }

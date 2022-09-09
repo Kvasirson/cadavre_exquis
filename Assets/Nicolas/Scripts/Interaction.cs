@@ -53,7 +53,7 @@ public class Interaction : MonoBehaviour
 						}
 						else if (_egg != null)
 						{
-							PutEggDown();
+							break;
 						}
 						break;
 
@@ -121,12 +121,8 @@ public class Interaction : MonoBehaviour
     void HoldEgg()
     {
 		_state = State.EGG;
+		_egg.DisplayEgg(false);
 	}
-
-	void PutEggDown()
-    {
-		_state = State.EMPTY;
-    }
 
 	void SellEgg()
     {
