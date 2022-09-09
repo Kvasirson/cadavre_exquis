@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ff5e62b377647de449baec51a9905400
+guid: 50bc3e8e7df7bbb44ac2769dddde2feb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: corps_idle_f_0
+      name: corps_idle_b_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a1d073980cd2a24fae6dfb8dc7e08d5
-      internalID: 547643950
+      spriteID: 3120019e407b71049b00c86415404f2b
+      internalID: 980287303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: corps_idle_f_1
+      name: corps_idle_b_1
       rect:
         serializedVersion: 2
         x: 0
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb6e01b6f51456c4ba4f272d9e461bae
-      internalID: -1336636058
+      spriteID: 2be1353fbbe79ef428ce0ed4ce87b6b7
+      internalID: 522073503
       vertices: []
       indices: 
       edges: []
@@ -157,8 +157,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      corps_idle_f_1: -1336636058
-      corps_idle_f_0: 547643950
+      corps_idle_b_0: 980287303
+      corps_idle_b_1: 522073503
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
