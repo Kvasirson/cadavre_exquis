@@ -75,7 +75,16 @@ public class Interaction : MonoBehaviour
         }
 	}
 
-    public void OnTriggerEnter2D(Collider2D col)
+	public State state
+	{
+		get { return _state; }
+		set
+		{
+			_state = value;
+		}
+	}
+
+	public void OnTriggerEnter2D(Collider2D col)
     {
 		if (!_isInRange)
 		{
