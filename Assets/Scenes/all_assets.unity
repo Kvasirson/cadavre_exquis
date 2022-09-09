@@ -735,7 +735,7 @@ MonoBehaviour:
   animatorArms: {fileID: 0}
   body: {fileID: 0}
   arms: {fileID: 0}
-  map: {fileID: 0}
+  map: {fileID: 71913937}
 --- !u!4 &483143576
 Transform:
   m_ObjectHideFlags: 0
