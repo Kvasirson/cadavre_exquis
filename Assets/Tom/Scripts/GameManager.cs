@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEditor;
 
 public class GameManager : MonoBehaviour
@@ -33,6 +35,15 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject m_endScreen;
 
+    [SerializeField]
+    Text m_globalTimerDisplay;
+
+    [SerializeField]
+    Text m_eggTimerDisplay;
+
+    [SerializeField]
+    Text m_goldCountDisplay;
+
     [Header("Scripts")]
     [SerializeField]
     List<ShopScript> m_shopsScripts;
@@ -62,6 +73,16 @@ public class GameManager : MonoBehaviour
     public List<PartTypes> UsedTypes
     {
         get { return _usedTypes; }
+    }
+
+    public float Gold
+    {
+        get { return _gold; }
+        set 
+        { 
+            _gold = value; 
+            m_goldCountDisplay.text = value.ToString();
+        }
     }
 
     public int GetSoldValue(int partsNb)
@@ -218,6 +239,7 @@ public class GameManager : MonoBehaviour
         while (eggTimerCurTime > 0f)
         {
             eggTimerCurTime -= Time.deltaTime;
+            m_eggTimerDisplay.text = eggTimerCurTime.ToString();
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
@@ -264,6 +286,7 @@ public class GameManager : MonoBehaviour
         while (curTime > 0f)
         {
             curTime -= Time.deltaTime;
+            m_globalTimerDisplay.text = curTime.ToString();
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
@@ -274,5 +297,10 @@ public class GameManager : MonoBehaviour
     public void GameEnd()
     {
         m_endScreen.SetActive(true);
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
     }
 }

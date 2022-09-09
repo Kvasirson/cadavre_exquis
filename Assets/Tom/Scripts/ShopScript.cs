@@ -14,7 +14,7 @@ public class ShopScript : MonoBehaviour
     [SerializeField]
     SpriteRenderer m_objectSpriteRend;
     [SerializeField]
-    Text m_objectFlavorText;
+    Text m_objectPrice;
 
     PartObject _displayedObject;
 
@@ -46,8 +46,8 @@ public class ShopScript : MonoBehaviour
         if(_displayedObject != null)
         {
             m_objectSpriteRend.sprite = _displayedObject.PartSprite;
-            m_objectFlavorText.text = _displayedObject.FlavorText;
             _objectPrice = Random.Range(0, 100);
+            m_objectPrice.text = _objectPrice.ToString();
         }
         else
         {
