@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab85d83af827ccf48b3a003938803fad, type: 3}
   m_Name: pig_arms
   m_EditorClassIdentifier: 
-  m_partSprite: {fileID: 21300000, guid: e6c47fd3d679cc64b9570c701613b43f, type: 3}
+  m_partSprite: {fileID: 21300000, guid: 4c55ae1959e38b24d912ec7bc9b74147, type: 3}
   m_partType: 2
   m_cutenessValue: 0.2
   m_tastinessValue: 0.5
