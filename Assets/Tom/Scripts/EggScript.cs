@@ -4,30 +4,7 @@ using UnityEngine;
 
 public class EggScript : MonoBehaviour
 {
-    PartObject _head;
-    PartObject _torso;
-    PartObject _arms;
-    PartObject _legs;
-    PartObject _tail;
-
-    PartObject[] _slots;
-
-    PartObject[] Slots
-    {
-        get 
-        { 
-            if(_slots == null)
-            {
-                _slots = new PartObject[5];
-                _slots[0] = _head;
-                _slots[1] = _torso;
-                _slots[2] = _arms;
-                _slots[3] = _legs;
-                _slots[4] = _tail;
-            }
-            return _slots;
-        }
-    }
+    PartObject[] _slots = new PartObject[5];
 
     GameManager _gameManager;
 
@@ -43,25 +20,33 @@ public class EggScript : MonoBehaviour
         switch (type)
         {
             case PartTypes.Head:
-                _head = part;
+                _slots[0] = part;
                 break;
             case PartTypes.Torso:
-                _torso = part;
+                _slots[1] = part;
                 break;
             case PartTypes.Arms:
-                _arms = part;
+                _slots[2] = part;
                 break;
             case PartTypes.Legs:
-                _legs = part;
+                _slots[3] = part;
                 break;
             case PartTypes.Tail:
-                _tail = part;
+                _slots[4] = part;
                 break;
         }
 
-        Debug.Log(type);
-        
-        _gameManager._usedTypes.Add(type);
+        if (EggCompleteCheck())
+        {
+            _gameManager._eggIscomplete = true;
+            _gameManager.StopEggTimer();
+            _gameManager._usedTypes.Clear();
+        }
+        else
+        {
+            _gameManager._usedTypes.Add(type);
+        }
+
         _gameManager.UpdateShops();
     }
 
@@ -69,9 +54,8 @@ public class EggScript : MonoBehaviour
     {
         float multiplier = 0f;
         int partsNumb = 0;
-        int baseSoldValue = _gameManager.BasePartSoldValue;
 
-        foreach (PartObject part in Slots)
+        foreach (PartObject part in _slots)
         {
             if (part != null)
             {
@@ -80,17 +64,53 @@ public class EggScript : MonoBehaviour
             }
         }
 
+        int soldValue = _gameManager.GetSoldValue(partsNumb);
+
         multiplier /= partsNumb;
-        return multiplier*baseSoldValue;
+        return multiplier*soldValue;
+    }
+
+    public bool IsEmpty
+    {
+        get
+        {
+            bool isEmpty = true;
+
+            foreach (PartObject part in _slots)
+            {
+                if (part != null)
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
+
+            return isEmpty;
+        }
+    }
+
+    bool EggCompleteCheck()
+    {
+        bool emptySlot = false;
+        for (int i = 0; i < _slots.Length; i++)
+        {
+            if(_slots[i] == null)
+            {
+                emptySlot = true;
+                break;
+            }
+        }
+
+        return !emptySlot;
     }
 
     public void Reset()
     {
-        for(int i = 0; i < Slots.Length; i++)
+        for(int i = 0; i < _slots.Length; i++)
         {
-            Slots[i] = null;
+            _slots[i] = null;
         }
 
-        _gameManager.StopTimer();
+        _gameManager.StopEggTimer();
     }
 }

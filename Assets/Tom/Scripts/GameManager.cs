@@ -6,12 +6,22 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     [Header("Shops")]
-    [SerializeField]
     [Range(0f, 1f)]
+    [SerializeField]
     float m_favoriteAttributeChance;
 
+    [Header("PartsSoldValue")]
+    public int m_base1PartSoldValue;
+    public int m_base2PartsSoldValue;
+    public int m_base3PartsSoldValue;
+    public int m_base4PartsSoldValue;
+    public int m_base5PartsSoldValue;
+
+    [Header("Base Gold")]
+    public float _gold;
+
     [SerializeField]
-    int m_basePartSoldValue;
+    float m_globalTimerDuration;
 
     [SerializeField]
     float m_eggTimerDuration;
@@ -19,6 +29,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     float m_eggTimerBonusDuration;
 
+    [Header("UI")]
+    [SerializeField]
+    GameObject m_endScreen;
+
+    [Header("Scripts")]
     [SerializeField]
     List<ShopScript> m_shopsScripts;
 
@@ -27,13 +42,14 @@ public class GameManager : MonoBehaviour
 
     static GameManager _instance;
 
-    public float _gold;
-
     [HideInInspector]
     public List<PartTypes> _usedTypes;
 
-    float timerCurTime;
-    Coroutine curTimer;
+    [HideInInspector]
+    public bool _eggIscomplete;
+
+    float eggTimerCurTime;
+    Coroutine curEggTimer;
 
     PartObject[] _objectsPool;
     List<PartObject> _tempObjectsPool;
@@ -48,20 +64,36 @@ public class GameManager : MonoBehaviour
         get { return _usedTypes; }
     }
 
-    public int BasePartSoldValue
+    public int GetSoldValue(int partsNb)
     {
-        get { return m_basePartSoldValue; }
+        switch (partsNb)
+        {
+            case 1:
+                return m_base1PartSoldValue;
+            case 2:
+                return m_base2PartsSoldValue;
+            case 3:
+                return m_base3PartsSoldValue;
+            case 4: 
+                return m_base4PartsSoldValue;
+            case 5:
+                return m_base5PartsSoldValue;
+            default:
+                return 0;
+        }
     }
 
     private void Awake()
     {
         _instance = this;
+        m_endScreen.SetActive(false);
         _objectsPool = CreatePool();
         ResetCurPool();
     }
 
     private void Start()
     {
+        StartCoroutine(GlobalTimer());
         UpdateShops();
     }
 
@@ -85,8 +117,6 @@ public class GameManager : MonoBehaviour
 
     public void UpdateShops()
     {
-        curTimer = StartCoroutine(Timer());
-
         GetAvailableObjects();
 
         foreach (ShopScript shop in m_shopsScripts)
@@ -139,6 +169,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        PartObject selectedObject;
+
         float chance = Random.Range(0f, 1f);
         if (chance < m_favoriteAttributeChance)
         {
@@ -149,7 +181,7 @@ public class GameManager : MonoBehaviour
 
             int randomIndex = Random.Range(0, favoriteObjects.Count);
 
-            return favoriteObjects[randomIndex];
+            selectedObject = favoriteObjects[randomIndex];
         }
         else
         {
@@ -160,8 +192,10 @@ public class GameManager : MonoBehaviour
 
             int randomIndex = Random.Range(0, otherObjects.Count);
 
-            return otherObjects[randomIndex];
+            selectedObject = otherObjects[randomIndex];
         }
+
+        return selectedObject;
     }
 
     public void RemoveObjet(PartObject obj)
@@ -175,31 +209,70 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    IEnumerator Timer ()
+    #region Timer
+    IEnumerator EggTimer ()
     {
-        timerCurTime = m_eggTimerDuration;
+        eggTimerCurTime = 0f;
+        eggTimerCurTime += m_eggTimerDuration;
 
-        while (timerCurTime > 0f)
+        while (eggTimerCurTime > 0f)
         {
-            timerCurTime -= Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            eggTimerCurTime -= Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime);
         }
 
-        TimerEnd();
+        EggTimerEnd();
     }
 
-    void TimerEnd()
+    void EggTimerEnd()
     {
+        if (_gold <= 0)
+        {
+            GameEnd();
+            return;
+        }
+
+        Debug.Log("Egg reset");
         m_eggScript.Reset();
+        ResetCurPool();
+        curEggTimer = null;
     }
 
-    public void StopTimer()
+    public void StopEggTimer()
     {
-        StopCoroutine(curTimer);
+        StopCoroutine(curEggTimer);
+        eggTimerCurTime = 0f;
+        curEggTimer = null;
     }
 
-    public void IncreaseTimer()
+    public void IncreaseEggTimer()
     {
-        timerCurTime += m_eggTimerBonusDuration;
+        if(curEggTimer == null)
+        {
+            curEggTimer = StartCoroutine(EggTimer());
+        }
+        else
+        {
+            eggTimerCurTime += m_eggTimerBonusDuration;
+        }
+    }
+
+    IEnumerator GlobalTimer()
+    {
+        float curTime = m_globalTimerDuration;
+
+        while (curTime > 0f)
+        {
+            curTime -= Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+        GameEnd();
+    }
+    #endregion
+
+    public void GameEnd()
+    {
+        m_endScreen.SetActive(true);
     }
 }

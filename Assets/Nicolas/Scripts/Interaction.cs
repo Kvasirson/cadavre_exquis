@@ -35,11 +35,11 @@ public class Interaction : MonoBehaviour
 				switch (_state)
 				{
 					case State.EMPTY:
-						if(_vendor != null)
+						if(_vendor != null && _vendor.DisplayedObject != null && _gameManager._gold > 0 && _gameManager._eggIscomplete != true)
                         {
 							BuyPart();
                         }
-						else if(_egg != null)
+						else if(_egg != null && !_egg.IsEmpty)
                         {
 							HoldEgg();
                         }
@@ -83,7 +83,11 @@ public class Interaction : MonoBehaviour
 			{
 				_isInRange = true;
 				_vendor = col.transform.GetComponent<ShopScript>();
-				Debug.Log("collide");
+
+				if (_state == State.EMPTY)
+                {
+					_vendor.ShowDisplayedObject(true);
+				}
 			}
 			else if (col.tag == "egg")
             {
@@ -95,15 +99,22 @@ public class Interaction : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D col)
     {
-		_isInRange = false;
-		_vendor = null;
+		if(_vendor != null)
+        {
+			if (_state == State.EMPTY)
+            {
+				_vendor.ShowDisplayedObject(false);
+			}
+
+			_vendor = null;
+		}
 
 		if(_state != State.EGG)
         {
 			_egg = null;
 		}
 
-		Debug.Log("exit");
+		_isInRange = false;
 	}
 
     #region Interaction Outcomes
@@ -121,6 +132,12 @@ public class Interaction : MonoBehaviour
     {
 		_state = State.EMPTY;
 		_gameManager._gold += _egg.SoldValue(_vendor.FavoriteAttribute);
+
+		if(_gameManager._gold < 0)
+        {
+			_gameManager.GameEnd();
+        }
+
 		_gameManager.ResetCurPool();
 		_egg.Reset();
 		_egg = null;
@@ -131,6 +148,7 @@ public class Interaction : MonoBehaviour
 		_state = State.PART;
 		_gameManager._gold += - _vendor.ObjectPrice;
 		_heldPart = _vendor.DisplayedObject;
+		_vendor.ShowDisplayedObject(false);
 		_gameManager.RemoveObjet(_heldPart);
     }
 
@@ -139,6 +157,7 @@ public class Interaction : MonoBehaviour
 		_state = State.EMPTY;
 		_egg.AddPart(_heldPart);
 		_heldPart = null;
+		_gameManager.IncreaseEggTimer();
 	}
     #endregion
 }
