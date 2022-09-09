@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab85d83af827ccf48b3a003938803fad, type: 3}
   m_Name: bat_torso
   m_EditorClassIdentifier: 
-  m_partSprite: {fileID: 21300000, guid: cc7ec7aff0d066a468181b81f042cb70, type: 3}
+  m_partSprite: {fileID: 21300000, guid: 35740ea2e41d84a49b8fb12cd72ce118, type: 3}
   m_partType: 1
   m_cutenessValue: 0.05
   m_tastinessValue: 0.25
