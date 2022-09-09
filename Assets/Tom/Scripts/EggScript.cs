@@ -140,5 +140,6 @@ public class EggScript : MonoBehaviour
     public void DisplayCreature(bool display)
     {
         m_creatureDisplay.SetActive(display);
+        m_creatureDisplay.GetComponent<CreatureScript>().Create(_slots[0].PartSprite, _slots[1].PartSprite, _slots[2].PartSprite, _slots[3].PartSprite, _slots[4].PartSprite);
     }
 }
