@@ -82,17 +82,17 @@ public class Movement : MonoBehaviour
 
 		if (camLeft > leftBorder)
         {
-			if (this.transform.position.x < deadZoneLeft)	{ targetCamera.transform.position += new Vector3(movement.x, 0); }
+			if (this.transform.position.x < deadZoneLeft && movement.x < 0)	{ targetCamera.transform.position += new Vector3(movement.x, 0); }
         }
 		if (camRight < rightBorder) 
 		{
-			if (this.transform.position.x > deadZoneRight)	{ targetCamera.transform.position += new Vector3(movement.x, 0); } 
+			if (this.transform.position.x > deadZoneRight && movement.x > 0)	{ targetCamera.transform.position += new Vector3(movement.x, 0); } 
 		}
 		if (camUp < upBorder) 
 		{
-			if (this.transform.position.y > deadZoneUp)	{ targetCamera.transform.position += new Vector3(0, movement.y); } 
+			if (this.transform.position.y > deadZoneUp && movement.y > 0)	{ targetCamera.transform.position += new Vector3(0, movement.y); } 
 		}
-		if (camBottom > bottomBorder) 
+		if (camBottom > bottomBorder && movement.y < 0) 
 		{ 
 			if (this.transform.position.y < deadZoneBottom){ targetCamera.transform.position += new Vector3(0, movement.y); } 
 		}
