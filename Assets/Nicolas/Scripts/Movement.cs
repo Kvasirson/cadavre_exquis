@@ -20,6 +20,12 @@ public class Movement : MonoBehaviour
 
 		this.transform.position = this.transform.position + movement;
 		MoveCamera(movement);
+
+        if (inputDir.x > 0) { this.GetComponent<SpriteRenderer>().flipX = true; }
+        else { this.GetComponent<SpriteRenderer>().flipX = false; }
+		animator.SetFloat("horizontal", inputDir.x);
+		animator.SetFloat("vertical", inputDir.y);
+		animator.SetFloat("speed", inputDir.sqrMagnitude);
 	}
 
 	private void MoveCamera(Vector3 movement)
