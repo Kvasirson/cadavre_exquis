@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab85d83af827ccf48b3a003938803fad, type: 3}
   m_Name: uglyDemon_head
   m_EditorClassIdentifier: 
-  m_partSprite: {fileID: 0}
+  m_partSprite: {fileID: 21300000, guid: 64e73fda7a0fc6e4796f28449c82207e, type: 3}
   m_partType: 0
   m_cutenessValue: 0.1
   m_tastinessValue: 0.1
