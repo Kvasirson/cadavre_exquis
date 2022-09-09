@@ -70,7 +70,7 @@ public class Movement : MonoBehaviour
 		{
 			if (this.transform.position.x <= deadZoneLeft)
 			{
-				targetCamera.transform.position += new Vector3(movement.x, 0);
+				targetCamera.transform.position += movement;
 			}
         }
 
@@ -78,7 +78,7 @@ public class Movement : MonoBehaviour
         {
 			if (this.transform.position.x >= deadZoneRight)
 			{
-				targetCamera.transform.position += new Vector3(movement.x, 0);
+				targetCamera.transform.position += movement;
 			}
 		}
 	}

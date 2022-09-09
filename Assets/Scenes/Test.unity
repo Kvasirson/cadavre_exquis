@@ -301,12 +301,12 @@ SpriteRenderer:
   m_SortingLayerID: 1185848245
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 547643950, guid: ff5e62b377647de449baec51a9905400, type: 3}
+  m_Sprite: {fileID: 547643950, guid: 9512f1094f3afaf44bf258020c5b4b79, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 32, y: 32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6f59a58fffac74b9c7a09fefda1041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 15
   targetCamera: {fileID: 1623081141}
   offset: 5
   leftBorder: -15
@@ -363,7 +363,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497366632}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1894, y: 0.8022, z: 0}
+  m_LocalPosition: {x: 0.09, y: 0.14, z: 0}
   m_LocalScale: {x: 2.5608, y: 2.7766, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -839,7 +839,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 120
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
