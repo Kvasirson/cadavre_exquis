@@ -79,23 +79,22 @@ public class Movement : MonoBehaviour
 		float camBottom = cam.y - height / 2;
 
 
-		Debug.Log("cam" + camUp);
 
-		if (camLeft>=leftBorder)
+		if (camLeft > leftBorder)
         {
-			if (this.transform.position.x <= deadZoneLeft)	{ targetCamera.transform.position += new Vector3(movement.x, 0); }
+			if (this.transform.position.x < deadZoneLeft)	{ targetCamera.transform.position += new Vector3(movement.x, 0); }
         }
-		if (camRight <= rightBorder) 
+		if (camRight < rightBorder) 
 		{
-			if (this.transform.position.x >= deadZoneRight)	{ targetCamera.transform.position += new Vector3(movement.x, 0); } 
+			if (this.transform.position.x > deadZoneRight)	{ targetCamera.transform.position += new Vector3(movement.x, 0); } 
 		}
-		if (camUp <= upBorder) 
+		if (camUp < upBorder) 
 		{
-			if (this.transform.position.y >= deadZoneUp)	{ targetCamera.transform.position += new Vector3(0, movement.y); } 
+			if (this.transform.position.y > deadZoneUp)	{ targetCamera.transform.position += new Vector3(0, movement.y); } 
 		}
-		if (camBottom >= bottomBorder) 
+		if (camBottom > bottomBorder) 
 		{ 
-			if (this.transform.position.y <= deadZoneBottom){ targetCamera.transform.position += new Vector3(0, movement.y); } 
+			if (this.transform.position.y < deadZoneBottom){ targetCamera.transform.position += new Vector3(0, movement.y); } 
 		}
 	}
 }
